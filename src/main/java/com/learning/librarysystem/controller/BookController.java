@@ -7,6 +7,8 @@ import com.learning.librarysystem.repository.BookRepository;
 import com.learning.librarysystem.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -20,9 +22,12 @@ public class BookController {
 
 
     private final BookService bookService;
+    Logger logger = LoggerFactory.getLogger(BookController.class);
+
 
     @PostMapping
     public BookDto createBook(@RequestBody @Valid CreateBookDto bookDto){
+        logger.info("Create Book");
         return bookService.createBook(bookDto);
     }
 
@@ -35,6 +40,7 @@ public class BookController {
 
     @GetMapping(path = "{id}")
     public BookDto getBookById(@PathVariable("id") String id){
+
         return bookService.findBookById(id);
     }
 

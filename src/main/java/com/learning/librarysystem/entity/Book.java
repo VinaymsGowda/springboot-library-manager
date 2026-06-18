@@ -2,16 +2,13 @@ package com.learning.librarysystem.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import java.time.LocalDateTime;
+import org.hibernate.annotations.Audited;
 
 @Entity
 @Getter
 @Setter
-@ToString
-public class Book {
+@Audited
+public class Book extends Audit{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,11 +23,7 @@ public class Book {
     @Column(nullable = false)
     private int price;
 
-    @CreationTimestamp
-    private LocalDateTime createdAt;
 
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Author author;
